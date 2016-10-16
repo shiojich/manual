@@ -1,0 +1,43 @@
+#情報実験機でやったこと#
+
+vim をインストール
+$ sudo apt-get install vim
+
+vim の設定ファイル .vimrc を作成
+$ vi .vimrc
+
+%set コマンドが怒られたので, 以下の一文を .bashrc に追加したがあまり意味なさそう
+%export PATH=$PATH:/sbin
+注意: $ source .vimrc をやらない
+
+tex をインストール
+$ sudo apt-get install texlive
+$ sudo apt-get install texlive-lang-cjk !日本語入力
+
+dennou の stylefile を導入  !研究室 Hiki 参照(読書会のページ)
+
+まず dennou-sty-6-current.tar.gz を用意
+$ tar xvzf dennou-sty-6-current.tar.gz  !解凍
+$ cd dennou_sty/DOC/
+
+$ vi Makefile 
+TEXMF_DIR=usr/share/texmf/tex/generic/dennou-sty-6
+$ nkf -w --overwrite *.ins
+$ make
+$ nkf -w --overwrite *.doc
+$ make
+
+ここで make コマンドがインストールされていなかったので取得
+$ sudo apt-get update
+$ sudo apt-get install build-essential
+$ sudo apt-get install make
+
+もう一度 nkf の流れをやってから
+$ sudo make install
+ここで Makefile の中の一文でエラーが出た
+以下の行をコメントアウト
+#       cp *.dvi $(DESTDIR)/$(DOCUMENT_DIR)
+
+$ sudo make install
+$ mktexlsr
+
