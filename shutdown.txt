@@ -1,0 +1,10 @@
+#シャットダウン再起動するコマンド#
+
+いますぐシャットダウン
+$ sudo shutdown -h now
+
+いますぐ再起動
+$ sudo shutdown -r now
+もしくは
+$ sudo reboot
+
