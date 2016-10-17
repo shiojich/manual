@@ -1,0 +1,31 @@
+#ssh 接続でローカルのリポジトリを github プッシュする方法#
+
+ssh 接続が成功したとする.
+
+github にリポジトリを新しく作る. "New repository" をクリック.
+リポジトリ名を入力し, "create repository" をクリック.
+リポジトリがある画面で SSH を選択し, 表示された URL をコピーしておく.
+今回は, git@github.com:shiojich/paul.git
+
+はじめにローカルリポジトリを作成
+$ mkdir something
+$ cd something
+$ git init         !git リポジトリを新しく作るコマンド
+
+変更を git のインデックスに追加する
+$ git add hello.txt
+
+変更結果をローカルリポジトリにコミットする
+$ git commit -m "new file"
+""の中はコメントを書けば良い.
+
+確認
+$ git status
+
+初回のみ, リモートリポジトリにプッシュする前に, リモートリポジトリの情報を追加する.
+$ git remote add origin URL
+URL の部分に先ほどコピーしたものを書く.
+
+プッシュする
+$ git push origin master
+

@@ -1,0 +1,37 @@
+#ssh 接続設定#
+
+鍵をつくる
+$ cd ~/.ssh
+$ ssh-kegen -t rsa
+ここで鍵を置く場所に注意. 既に id_rsa がある場合は上書きされてしまうので, 名前を変える. 今回は github2_id_rsa にした.
+
+秘密鍵のパーミッションを強化する
+$ chmod 600 github2_id_rsa
+
+公開鍵(.pub)を　github に登録する
+
+コンフィグファイルに設定を書く
+$ vi ~/.ssh/config
+  Host github-shiojich
+    User git
+    Port 22
+    HostName github.com
+    IdentityFile ~/.ssh/github2_id_rsa
+    TCPKeepAlive yes
+
+Linux の場合の鍵の登録?
+$ eval `ssh-agent`
+$ ssh-add github2_id_rsa
+パスフレーズを求められるので入力する.
+
+接続を確認する
+$ ssh -t github-shiojich
+何か聞かれたら yes と答える. パスフレーズを入力する.
+Hi shiojich! 〜〜と出力されれば成功.
+
+ターミナルを開く時にパスフレーズを聞かれるようにする
+$ vi .bashrc
+以下の二文を最後に追加
+eval `ssh-agent`
+ssh-add ~/.ssh/github2_id_rsa
+
