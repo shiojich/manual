@@ -1,0 +1,39 @@
+#パワーポイントのアップロード方法#
+
+まずパワーポイントを .pptx と .jpg(もしくは .png) それぞれ用意する.
+jpg(png) はファイル名に注意. 英語表記に手動で変えるのが無難.
+
+$ sg itpass
+$ umask 002
+$ export LANG=ja_JP.EUCJP
+
+$ cd ~itpass/dc-arch/exp/fy2016/161008
+$ mkdir hatena    !去年のものを参考にして名前つける
+$ cd hatena
+$ mkdir src
+
+$ cd ./..   !ひとつ上のディレクトリ(ここでは161008)に移動
+$ cp hatena.SIGEN   !誰かのファイルをコピーする
+$ vi hatena.SIGEN   !内容を書き換え, ファイル名も適宜変える
+
+jpg ファイルを src にコピーする.
+$ cp *.jpg ~itpass/dc-arch/exp/fy2016/161008/hatena/src
+
+$ cd ~itpass/dc-arch/exp/fy2016/161008/hatena
+$ dcppt.pl -x
+何か聞かれるが, 何もせず Enter.
+Title は書く. 文字化けしたらターミナルの文字エンコーディングを変えると良い.
+
+src のパーミッション 775, 中身(jpg ファイル) 664 を確認する.
+できていなかったら chmod.
+
+次にシンボリックリンクを作成する.
+$ cd ~itpass/ftp/exp/fy2016/161008
+$ mkdir hatena
+$ cd hatena
+
+$ itpass/bin/dcreal-lndir-modified-for-itpass.rb ~itpass/dc-arch/exp/fy2016/161008/hatena/    !パスとか間違ってるかも
+
+以下よくわからない
+$ ln -s パス
+$ cp pptx
